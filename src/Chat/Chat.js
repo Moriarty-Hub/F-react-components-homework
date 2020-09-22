@@ -28,12 +28,9 @@ class Chat extends Component {
   }
 
   addMessage = (message) => {
-    const messages = this.state.messages.concat(message);
-    setTimeout(() => {
-      this.setState({
-        messages,
-      });
-    }, 1);
+    this.setState((prevState) => ({
+      messages: prevState.messages.concat(message),
+    }));
   };
 
   addRobotReply = (message) => {
@@ -49,10 +46,7 @@ class Chat extends Component {
       text,
     };
     this.addMessage(message);
-
-    setTimeout(() => {
-      this.addRobotReply(text);
-    }, 500);
+    this.addRobotReply(text);
   };
 
   render() {
